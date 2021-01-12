@@ -3,8 +3,7 @@ const fs =require('fs');
 
 const addTodo= (data)=>{
 
-    // for making the default index value change
-    // let info=data.reduce((acc,{Id,...d})=>{acc[Id]=d;return  acc } ,{})
+
     fs.writeFile("todo-data/data.json",JSON.stringify(data),(error)=>{
         if(error){
             console.log(error);
@@ -13,6 +12,28 @@ const addTodo= (data)=>{
         }
     })
 }
+const showTodo=()=>{
+    fs.readFile("todo-data/data.json",(error,data)=>{
+        if(error){
+            console.log("File is Empty");
+        }else{
+            console.table(JSON.parse(data));      
+
+        }
+    })
+}
+
+const showOneTodo=(show)=>{
+    fs.readFile("todo-data/data.json",(error,data)=>{
+        if(error){
+            console.log(error);
+        }else{
+
+            console.table(JSON.parse(data),show); 
+        }
+    })
+}
+
 const deleteTask=(task)=>{
     fs.readFile("todo-data/data.json",(error,data)=>{
         if(error){
@@ -38,39 +59,55 @@ const deleteTask=(task)=>{
         }
     });
 }
-const updateTodo=(id,data)=>{
-
+const deleteTODO=()=>{
+   
+    fs.unlink("todo-data/data.json",(error)=>{
+        if(error){
+            console.log(error);
+        }else{
+            console.log("sucessfully");
+        }
+    });
+    
 }
-const showTodo=()=>{
+                
+
+             
+
+const updateTodo=(id,info)=>{
     fs.readFile("todo-data/data.json",(error,data)=>{
         if(error){
             console.log(error);
         }else{
-            console.table(JSON.parse(data));
-            // const array = [{myId: 42, name: 'John', color: 'red'}, {myId: 1337, name: 'Jane', color: 'blue'}]
-
-            //     const transformed = array.reduce((acc, {myId, ...j}) => { acc[myId] = j; return acc}, {});
-
-            //     console.table(transformed)
-
+            if(data){
+                data=JSON.parse(data);
+              for(var i=0;i<data.length;i++){
+                    if(i==id){
+                        if(info.Task.length){
+                            data[i].Task=info.Task;
+                        }
+                         if(info.ImportanceLevel){
+                            data[i].ImportanceLevel=info.ImportanceLevel;
+                        }
+                         if(info.TimeFrom){
+                            data[i].TimeFrom=info.TimeFrom;
+                        }
+            
+                    }
+                }   
+                console.table(data);
+                fs.writeFile("todo-data/data.json",JSON.stringify(data),(error)=>{
+                    if(error){
+                        console.log(error);
+                    }else{
+                        console.log("sucessfully");
+                    }
+                });  
+                
+            }
+            
         }
-    })
+    });
 }
 
-const showOneTodo=(show)=>{
-    fs.readFile("todo-data/data.json",(error,data)=>{
-        if(error){
-            console.log(error);
-        }else{
-
-            console.table(JSON.parse(data),show);
-            // const array = [{myId: 42, name: 'John', color: 'red'}, {myId: 1337, name: 'Jane', color: 'blue'}]
-
-            //     const transformed = array.reduce((acc, {myId, ...j}) => { acc[myId] = j; return acc}, {});
-
-            //     console.table(transformed)
-
-        }
-    })
-}
-module.exports = {addTodo,showTodo,deleteTask,showOneTodo}
+module.exports = {addTodo,showTodo,deleteTask,showOneTodo,updateTodo,deleteTODO}

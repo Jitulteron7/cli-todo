@@ -1,17 +1,22 @@
-const {addTodo,showTodo,deleteTask,showOneTodo} =require("./app")
+const moment=require('moment');
+const {addTodo,showTodo,deleteTask,showOneTodo,deleteTODO,updateTodo} =require("./app")
 const execa=require("execa");
 // execa("git",["add","package.json"]);
 
 const structDatas = [
-    { handler: 'http', endpoint: 'http://localhost:3000/path', method: 'ALL' },
-    {handler: 'event', endpoint: 'http://localhost:3000/event', method: 'POST' },
-    { handler: 'GCS', endpoint: 'http://localhost:3000/GCS', method: 'POST'},
+    { "Task": 'http', "Time_From": 'http://localhost:3000/path',"ImportanceLevel":"2","Set_At":moment(),"Updated_At":moment()},
+    { "Task": 'http', "Time_From": 'http://localhost:3000/path',"ImportanceLevel":"2","Set_At":moment(),"Updated_At":moment()},
+    { "Task": 'http', "Time_From": 'http://localhost:3000/path',"ImportanceLevel":"2","Set_At":moment(),"Updated_At":moment()},
+    { "Task": 'http', "Time_From": 'http://localhost:3000/path',"ImportanceLevel":"2","Set_At":moment(),"Updated_At":moment()},
+    { "Task": 'http', "Time_From": 'http://localhost:3000/path',"ImportanceLevel":"2","Set_At":moment(),"Updated_At":moment()},
+    
        
 ];
 
 
 // showOneTodo(["go","handler"])
 // addTodo(structDatas)
-showTodo();
+// showTodo();
+updateTodo(1,{Task:"Kankan",TimeFrom:"3-4 PM"});
+// deleteTODO();
 // deleteTask(1);
-// console.table(structDatas);
