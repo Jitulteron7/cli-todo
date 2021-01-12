@@ -1,0 +1,1 @@
+[{"handler":"http","endpoint":"http://localhost:3000/path","method":"ALL"},{"handler":"GCS","endpoint":"http://localhost:3000/GCS","method":"POST","go":{"date":"1/12/2021","date1":"asd"}}]
