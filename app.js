@@ -21,20 +21,10 @@ const deleteTask=(task)=>{
             if(data){
                 let info=JSON.parse(data);
 
-                
-                
-                    // delete info[task]; (prob : delete does not update the index value);
-                
-                
-                // info=Object.values(info);
                 delete info[task];
                 // index refactor
                 info=Object.values(info);
-                // info=Object.values(info)
-                // for(var i=0;i<info.length;i++){
-                //     info.splice(i,);
-                // }
-                // let info=data.reduce((acc,{Id,...d})=>{let i =1;acc[i]=d;i++;return  acc } ,{})
+               
                 fs.writeFile("todo-data/data.json",JSON.stringify(info),(error)=>{
                     if(error){
                         console.log(error);
